@@ -314,7 +314,9 @@
 
     // --- FIRESTORE HELPERS ---
     function getCollection() {
-      return collection(db, 'artifacts', 'senior-citizen-dues-tracker', 'users', uid, 'senior_dues');
+      // Switched to 'public' path so data syncs across all devices.
+      // Make sure to update Firebase Security Rules to allow access!
+      return collection(db, 'artifacts', 'senior-citizen-dues-tracker', 'public', 'data', 'senior_dues');
     }
 
     // --- SAVE / UPDATE LOGIC ---
@@ -336,7 +338,8 @@
       try {
         if (docId) {
           // Update Existing
-          const docRef = doc(db, 'artifacts', 'senior-citizen-dues-tracker', 'users', uid, 'senior_dues', docId);
+          // Ensure we update using the same shared public path logic:
+          const docRef = doc(db, 'artifacts', 'senior-citizen-dues-tracker', 'public', 'data', 'senior_dues', docId);
           await updateDoc(docRef, data);
           alert('Entry Updated Successfully');
           resetForm();
@@ -349,7 +352,7 @@
         }
       } catch (err) {
         console.error(err);
-        alert('Error saving data. Check console.');
+        alert('Error saving data. Please check your internet connection or ensure your Firebase Security Rules allow public access.');
       } finally {
         saveBtn.disabled = false;
         saveBtnText.innerText = docId ? "Update Record" : "Save Record";
