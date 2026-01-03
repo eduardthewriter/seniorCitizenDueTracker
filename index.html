@@ -133,7 +133,7 @@
               </div>
               <div class="md:col-span-2">
                 <label class="block text-sm font-semibold text-slate-700 mb-2">Senior Name</label>
-                <input id="name" type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-mint-500 focus:ring-2 focus:ring-mint-200 outline-none transition-all bg-slate-50 focus:bg-white">
+                <input id="name" type="text" placeholder="Last Name, First Name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-mint-500 focus:ring-2 focus:ring-mint-200 outline-none transition-all bg-slate-50 focus:bg-white">
               </div>
             </div>
 
@@ -186,14 +186,16 @@
 
         <div class="bg-white rounded-xl shadow-sm border border-mint-100 overflow-hidden flex-1">
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <!-- Added min-w-max to force horizontal scroll -->
+            <table class="w-full text-left text-sm min-w-max">
               <thead class="bg-mint-50 text-mint-800 border-b border-mint-100">
                 <tr>
                   <th class="p-4 font-semibold">Purok</th>
                   <th class="p-4 font-semibold">Name</th>
-                  <th class="p-4 text-right hidden sm:table-cell">2023</th>
-                  <th class="p-4 text-right hidden sm:table-cell">2024</th>
-                  <th class="p-4 text-right hidden sm:table-cell">2025</th>
+                  <!-- Removed hidden classes from headers -->
+                  <th class="p-4 text-right">2023</th>
+                  <th class="p-4 text-right">2024</th>
+                  <th class="p-4 text-right">2025</th>
                   <th class="p-4 text-right font-bold text-gold-600">Total</th>
                   <th class="p-4 text-center no-print">Edit</th>
                 </tr>
@@ -391,13 +393,11 @@
           <td class="p-4 font-medium text-slate-800">${r.purok}</td>
           <td class="p-4">
             <div class="font-bold text-slate-700">${r.name}</div>
-            <div class="text-xs text-slate-400 sm:hidden mt-1">
-              Total: ₱${total.toLocaleString()}
-            </div>
           </td>
-          <td class="p-4 text-right font-mono text-slate-500 hidden sm:table-cell">${r.y2023 || '-'}</td>
-          <td class="p-4 text-right font-mono text-slate-500 hidden sm:table-cell">${r.y2024 || '-'}</td>
-          <td class="p-4 text-right font-mono text-slate-500 hidden sm:table-cell">${r.y2025 || '-'}</td>
+          <!-- Removed hidden classes from cells -->
+          <td class="p-4 text-right font-mono text-slate-500">${r.y2023 || '-'}</td>
+          <td class="p-4 text-right font-mono text-slate-500">${r.y2024 || '-'}</td>
+          <td class="p-4 text-right font-mono text-slate-500">${r.y2025 || '-'}</td>
           <td class="p-4 text-right font-bold font-mono text-gold-600">₱${total.toLocaleString()}</td>
           <td class="p-4 text-center no-print">
             <button class="edit-btn p-2 text-mint-600 bg-mint-50 hover:bg-mint-100 rounded-lg transition-colors" data-id="${r.id}">
